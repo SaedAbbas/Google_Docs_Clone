@@ -1,12 +1,17 @@
 import type { Config } from 'tailwindcss';
+import animate from 'tailwindcss-animate';
+import defaultTheme from 'tailwindcss/defaultTheme';
+
 
 
 const config = {
+  darkMode: 'class',
   content: [
     './pages/**/*.{ts,tsx}',
     './components/**/*.{ts,tsx}',
     './app/**/*.{ts,tsx}',
     './src/**/*.{ts,tsx}',
+    './styles/**/*.{css,scss}',
   ],
   prefix: '',
   theme: {
@@ -39,7 +44,7 @@ const config = {
         },
       },
       fontFamily: {
-        sans: ['var(--font-sans)', ...fontFamily.sans],
+        sans: ['var(--font-sans)', defaultTheme.fontFamily.sans],
       },
       keyframes: {
         'accordion-down': {
@@ -61,6 +66,7 @@ const config = {
       },
     },
   },
+  plugins: [animate],
 } satisfies Config;
 
 export default config;
