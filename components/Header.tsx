@@ -14,13 +14,7 @@ const Header = ({children}:HeaderProps) => {
           height={32}
           className="max-md:hidden"
         />
-        <Image
-          src="/assets/icons/logo-icon.svg"
-          alt="Logo"
-          width={32}
-          height={32}
-          className="max-md:hidden mr-2"
-        />
+
       </Link>
       {children}
     </div>
