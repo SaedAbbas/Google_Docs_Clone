@@ -2,6 +2,10 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+
+
+// الستايلات اللي تحت كلها حاصة بتعوت الشاد سي ان 
+//بس انا فصلت الكلاسات اللي انا انشاتها عشان ما يصير في تعارض وحطيتها في ملف custom css
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
