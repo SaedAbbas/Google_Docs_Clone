@@ -1,11 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 
-type headerProps = {
-    children : React.ReactNode
-}
 
-const Header = ({children}:headerProps) => {
+
+const Header = ({children}:HeaderProps) => {
   return (
     <div className="header">
       <Link href="/">
