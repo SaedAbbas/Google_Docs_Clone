@@ -5,7 +5,7 @@ import Link from "next/link";
 
 const Header = ({children}:HeaderProps) => {
   return (
-    <div className="header">
+    <div className="header border-b border-dark-300">
       <Link href="/">
         <Image
           src="/assets/icons/logo.svg"
