@@ -36,8 +36,10 @@ export default function RootLayout({
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
-          {/* البرفايدر الخاص باللايف بلوكس */}
-          <Provider>{children}</Provider>   
+          <Provider>
+            {/* البرفايدر الخاص باللايف بلوكس */}
+            {children}
+          </Provider>
         </body>
       </html>
     </ClerkProvider>
