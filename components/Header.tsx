@@ -1,11 +1,12 @@
+import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 
 
 
-const Header = ({children}:HeaderProps) => {
+const Header = ({children,className}:HeaderProps) => {
   return (
-    <div className="header border-b border-dark-300">
+    <div className={cn("header border-b border-dark-300",className)}>
       <Link href="/">
         <Image
           src="/assets/icons/logo.svg"
