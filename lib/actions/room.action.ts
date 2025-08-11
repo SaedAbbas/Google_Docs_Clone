@@ -4,7 +4,7 @@ import { liveblocks } from "../liveblocks";
 import { revalidatePath } from "next/cache";
 import { parseStringify } from "../utils";
 
-//Set permission accesses to a room after creating a document
+//Set permission accesses to a room after creating a document  //this code server action
 export const createDocument = async ({
   userId,
   email,
