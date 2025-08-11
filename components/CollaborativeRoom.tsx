@@ -1,3 +1,4 @@
+'use client'
 import { ClientSideSuspense, RoomProvider } from "@liveblocks/react";
 import Header from "@/components/Header";
 import {
