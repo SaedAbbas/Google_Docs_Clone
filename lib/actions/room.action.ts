@@ -4,12 +4,10 @@ import { liveblocks } from "../liveblocks";
 import { revalidatePath } from "next/cache";
 import { parseStringify } from "../utils";
 
-//Set permission accesses to a room after creating a document  //this code server action
+//Set permission accesses to a room after creating a document  //this code server action //use server
 
-export const createDocument = async ({
-  userId,
-  email,
-}: CreateDocumentParams) => {
+export const createDocument = async ( {userId,email,}: CreateDocumentParams) => {
+
   const roomId = nanoid();
 
   try {
@@ -30,7 +28,7 @@ export const createDocument = async ({
       usersAccesses,
       defaultAccesses:[]
     });
-    revalidatePath('/') //بعد ما الغرفة اتعملت، طلبت من Next.js يعمل تحديث للصفحة الرئيسية / عشان يظهر فيها التغييرات.
+    revalidatePath('/') //بعد ما الغرفة اتعملت، طلبت من Next.js يعمل تحديث للصفحة الرئيسية على السيرفر طبعا بدون رفرش على المتصفح / عشان يظهر فيها التغييرات.
     
     return parseStringify(room)  //export const parseStringify = (value: any) => JSON.parse(JSON.stringify(value));
   } catch (error) {
