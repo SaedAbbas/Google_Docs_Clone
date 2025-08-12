@@ -1,7 +1,7 @@
-import AddDocumentBtn from "@/components/AddDocumentBtn";
-import Header from "@/components/Header";
+import AddDocumentBtn from "@/components/ui/AddDocumentBtn";
 import { SignedIn, UserButton } from "@clerk/nextjs";
 import { currentUser } from "@clerk/nextjs/server";
+import { Header } from "@radix-ui/react-accordion";
 import Image from "next/image";
 import { redirect } from "next/navigation";
 

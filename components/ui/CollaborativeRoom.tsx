@@ -1,6 +1,6 @@
-'use client'
+"use client";
 import { ClientSideSuspense, RoomProvider } from "@liveblocks/react";
-import Header from "@/components/Header";
+import Header from "@/components/ui/Header";
 import {
   SignedIn,
   SignedOut,
@@ -8,7 +8,8 @@ import {
   SignUpButton,
   UserButton,
 } from "@clerk/nextjs";
-import { Editor } from "./editor/Editor";
+import { Editor } from "../editor/Editor";
+import ActiveCollaborators from "./ActiveCollaborators";
 const CollaborativeRoom = () => {
   return (
     <RoomProvider id="my-room">
@@ -18,7 +19,8 @@ const CollaborativeRoom = () => {
             <div className="flex w-fit items-center justify-center gap-2">
               <p className="document-title">Share</p>
             </div>
-            <div className="flex justify-center items-center">
+            <div className="flex w-full flex-1 justify-end gap-2 sm:gap-3">
+              <ActiveCollaborators />
               <SignedOut>
                 <SignInButton />
                 <SignUpButton>

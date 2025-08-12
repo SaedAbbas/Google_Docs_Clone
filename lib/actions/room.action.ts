@@ -26,7 +26,7 @@ export const createDocument = async ( {userId,email,}: CreateDocumentParams) => 
     const room = await liveblocks.createRoom(roomId, {
       metadata,
       usersAccesses,
-      defaultAccesses:[]
+      defaultAccesses:['room:write'] // صلاحية اللي فالغرفة برضه انهم يكتبوا
     });
     revalidatePath('/') //بعد ما الغرفة اتعملت، طلبت من Next.js يعمل تحديث للصفحة الرئيسية على السيرفر طبعا بدون رفرش على المتصفح / عشان يظهر فيها التغييرات.
     

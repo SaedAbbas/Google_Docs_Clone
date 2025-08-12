@@ -1,4 +1,4 @@
-import CollaborativeRoom from "@/components/CollaborativeRoom";
+import CollaborativeRoom from "@/components/ui/CollaborativeRoom";
 import React from "react";
 
 const Document = () => {

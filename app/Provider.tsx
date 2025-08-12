@@ -1,6 +1,6 @@
 'use client'
 import {ClientSideSuspense, LiveblocksProvider} from '@liveblocks/react/suspense' 
-import Loader from '@/components/Loader'
+import Loader from '@/components/ui/Loader'
 import { ReactNode } from 'react'
 
 const Provider = ({children}:{children:ReactNode}) => {
