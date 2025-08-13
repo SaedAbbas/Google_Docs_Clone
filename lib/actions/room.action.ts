@@ -6,7 +6,7 @@ import { parseStringify } from "../utils";
 
 //Set permission accesses to a room after creating a document  //this code server action //use server
 
-export const createDocument = async ( {userId,email,}: CreateDocumentParams) => {
+export const createDocument = async ( {userId,email}: CreateDocumentParams) => {
 
   const roomId = nanoid();
 
@@ -35,6 +35,22 @@ export const createDocument = async ( {userId,email,}: CreateDocumentParams) => 
     console.log("error happend while creating a room", error);
   }
 };
+
+
+export const getDocument = async ({roomId, userId}: {roomId:string,userId:string}) => {
+try {
+    const room = await liveblocks.getRoom(roomId)
+  
+    const hasAccsess = Object.keys(room.usersAccesses).includes(userId)
+      if(!hasAccsess) 
+        throw new Error('You do not have access to this document')
+  
+      return parseStringify(room)
+  
+} catch (error) {
+    console.log('Error happend while getting a room :' , error)
+}
+}
 
 /*
 لو ما عملتها Server Action وشغلتها في Client Component مباشرة؟

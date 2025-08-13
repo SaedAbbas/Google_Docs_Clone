@@ -1,20 +1,26 @@
-'use client'
-import {ClientSideSuspense, LiveblocksProvider} from '@liveblocks/react/suspense' 
-import Loader from '@/components/ui/Loader'
-import { ReactNode } from 'react'
+"use client";
+import {ClientSideSuspense,LiveblocksProvider} from "@liveblocks/react/suspense";
+import Loader from "@/components/ui/Loader";
+import { ReactNode } from "react";
+import { getClerkUsers } from "@/lib/actions/user.action";
 
-const Provider = ({children}:{children:ReactNode}) => {
+const Provider = ({ children }: { children: ReactNode }) => {
   return (
     //السبب إنه استخدم authEndpoint بدل المفتاح العام هو الأمان، عشان ما ينكشف مفتاحك السري في المتصفح.
-    <LiveblocksProvider authEndpoint='/api/liveblocks-auth'>  
-        <ClientSideSuspense fallback={<Loader />}>
-          {children}
-        </ClientSideSuspense>
-    </LiveblocksProvider>
-  )
-}
+    <LiveblocksProvider
+      authEndpoint="/api/liveblocks-auth"
+      resolveUsers={async ({ userIds }) => {
+        const users = await getClerkUsers(userIds);
 
-export default Provider
+        return users;
+      }}
+    >
+      <ClientSideSuspense fallback={<Loader />}>{children}</ClientSideSuspense>
+    </LiveblocksProvider>
+  );
+};
+
+export default Provider;
 
 /*
 يطلب من Liveblocks إصدار توكن مصادقة (auth token) خاص بهذا المستخدم عن طريق liveblocks.identifyUser(...). 
