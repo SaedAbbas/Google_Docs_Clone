@@ -10,9 +10,9 @@ import {
 } from "@clerk/nextjs";
 import { Editor } from "../editor/Editor";
 import ActiveCollaborators from "./ActiveCollaborators";
-const CollaborativeRoom = () => {
+const CollaborativeRoom = ({roomId,roomMetadata} : CollaborativeRoomProps) => {
   return (
-    <RoomProvider id="my-room">
+    <RoomProvider id={roomId}>
       <ClientSideSuspense fallback={<div>Loading…</div>}>
         <Header>
           <div className="flex gap-2">
