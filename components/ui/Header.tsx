@@ -14,6 +14,7 @@ const Header = ({children,className}:HeaderProps) => {
           width={120}
           height={32}
           className="max-md:hidden"
+          priority
         />
 
       </Link>

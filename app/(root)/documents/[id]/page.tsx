@@ -4,7 +4,10 @@ import { currentUser } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import React from "react";
 
-const Document = async({params:{id}} : SearchParamProps) => {
+const Document = async({params} : SearchParamProps) => {
+
+  const {id} = await params
+
     const clerkUser = await currentUser()
     if(!clerkUser) redirect('/sign-in')
 

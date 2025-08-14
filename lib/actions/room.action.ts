@@ -37,20 +37,33 @@ export const createDocument = async ( {userId,email}: CreateDocumentParams) => {
 };
 
 
-export const getDocument = async ({roomId, userId}: {roomId:string,userId:string}) => {
-try {
-    const room = await liveblocks.getRoom(roomId)
-  
-    const hasAccsess = Object.keys(room.usersAccesses).includes(userId)
-      if(!hasAccsess) 
-        throw new Error('You do not have access to this document')
-  
-      return parseStringify(room)
-  
-} catch (error) {
-    console.log('Error happend while getting a room :' , error)
+export const getDocument = async ({roomId, userId}: {roomId:string, userId:string}) => {
+    try {
+        const room = await liveblocks.getRoom(roomId)
+      
+        const hasAccsess = Object.keys(room.usersAccesses).includes(userId)
+          if(!hasAccsess) 
+            throw new Error('You do not have access to this document')
+      
+          return parseStringify(room)
+      
+    } catch (error) {
+        console.log('Error happend while getting a room :' , error)
+    }
 }
-}
+/*
+بيجيب بيانات غرفة موجودة من Liveblocks
+
+بيتأكد إن اليوزر الحالي عنده صلاحية دخول
+
+لو مفيش صلاحية → يرمي Error
+
+لو عنده → بيرجع بيانات الغرفة
+*/
+
+
+
+
 
 /*
 لو ما عملتها Server Action وشغلتها في Client Component مباشرة؟

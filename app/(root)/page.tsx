@@ -29,6 +29,7 @@ export default async function Home() {
             width={40}
             height={40}
             className="mx-auto"
+            priority
           />
           <AddDocumentBtn
             userId={clerkUser.id}

@@ -22,7 +22,7 @@ const AddDocumentBtn = ({ userId, email }: AddDocumentBtnProps) => {
       onClick={addDocumentHandler}
       className="gradient-blue flex gap-1 shadow-md cursor-pointer"
     >
-      <Image src="/assets/icons/add.svg" alt="add" width={24} height={24} />
+      <Image src="/assets/icons/add.svg" priority alt="add" width={24} height={24} />
       <p className="hidden sm:block">Start a blank document</p>
     </Button>
   );

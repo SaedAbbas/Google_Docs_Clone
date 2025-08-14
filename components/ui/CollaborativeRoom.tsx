@@ -13,7 +13,7 @@ import ActiveCollaborators from "./ActiveCollaborators";
 const CollaborativeRoom = ({roomId,roomMetadata} : CollaborativeRoomProps) => {
   return (
     <RoomProvider id={roomId}>
-      <ClientSideSuspense fallback={<div>Loading…</div>}>
+      <ClientSideSuspense fallback={<div>Loading …</div>}>
         <Header>
           <div className="flex gap-2">
             <div className="flex w-fit items-center justify-center gap-2">
