@@ -1,6 +1,6 @@
 import { liveblocks } from "@/lib/liveblocks"; // هنا نستورد إعدادات Liveblocks اللي تم تعريفها مسبقاً في ملف lib/liveblocks
 import { getUserColor } from "@/lib/utils";
-import { currentUser } from "@clerk/nextjs/server"; // من Clerk، تجيب بيانات المستخدم الحالي من الـ backend
+import { currentUser } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 
 export async function POST(request: Request) {

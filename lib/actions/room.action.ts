@@ -37,11 +37,13 @@ export const createDocument = async ( {userId,email}: CreateDocumentParams) => {
 };
 
 
+
+
 export const getDocument = async ({roomId, userId}: {roomId:string, userId:string}) => {
     try {
         const room = await liveblocks.getRoom(roomId)
       
-        // const hasAccsess = Object.keys(room.usersAccesses).includes(userId)
+        // const hasAccsess = Object.keys(room.usersAccesses).includes(userId)    // userId:clerkUser.emailAddresses[0].emailAddress
         //   if(!hasAccsess) 
         //     throw new Error('You do not have access to this document')
       

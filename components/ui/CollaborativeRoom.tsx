@@ -10,14 +10,35 @@ import {
 } from "@clerk/nextjs";
 import { Editor } from "../editor/Editor";
 import ActiveCollaborators from "./ActiveCollaborators";
-const CollaborativeRoom = ({roomId,roomMetadata} : CollaborativeRoomProps) => {
+import { useRef, useState } from "react";
+import { Input } from "./input";
+const CollaborativeRoom = ({
+  roomId,
+  roomMetadata,
+}: CollaborativeRoomProps) => {
+  const [editing, setEditing] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [documentTitle, setDocumentTitle] = useState(roomMetadata.title);
+
+  const containerRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLDivElement>(null);
+
   return (
     <RoomProvider id={roomId}>
       <ClientSideSuspense fallback={<div>Loading …</div>}>
-        <Header>
-          <div className="flex gap-2">
-            <div className="flex w-fit items-center justify-center gap-2">
-              <p className="document-title">Share</p>
+        <div className="collaborative-room">
+          <Header>
+            <div
+              ref={containerRef}
+              className="flex w-fit items-center justify-center gap-2"
+            >
+              {editing && !loading ? (
+                <Input />
+              ) : (
+                <>
+                  <p className="document-title">{documentTitle}</p>
+                </>
+              )}
             </div>
             <div className="flex w-full flex-1 justify-end gap-2 sm:gap-3">
               <ActiveCollaborators />
@@ -33,9 +54,9 @@ const CollaborativeRoom = ({roomId,roomMetadata} : CollaborativeRoomProps) => {
                 <UserButton />
               </SignedIn>
             </div>
-          </div>
-        </Header>
-        <Editor />
+          </Header>
+          <Editor />
+        </div>
       </ClientSideSuspense>
     </RoomProvider>
   );

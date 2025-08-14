@@ -3,7 +3,7 @@ import Image from "next/image";
 import React from "react";
 
 const ActiveCollaborators = () => {
-  const others = useOthers();
+  const others = useOthers(); // عشان اعرف مين فالغرفة لازم الروم بروفايدر يكون عارف الايدي بتاع الغرفة ويكون معرف عنده ,عشان يشتغل اليوز اذرز
   const collaborators = others.map((other) => other.info);
 
   return (

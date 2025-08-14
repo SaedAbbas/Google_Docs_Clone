@@ -36,6 +36,8 @@ export default async function Home() {
             email={clerkUser.emailAddresses[0].emailAddress}
           />
         </div>
+
+        // to add documnet we send the userid and his email from clerk and then when click to add doc the room will create automatically in server from server action and then the borwser will direct me to the document page with random id and this id for the room and this id we can take it and passes to CollaborativeRoom component that contain room provider and passes to this provider to know who is in this room and display all user in conditions
       )}
     </main>
   );
