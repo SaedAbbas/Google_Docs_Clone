@@ -10,8 +10,8 @@ const Provider = ({ children }: { children: ReactNode }) => {
     <LiveblocksProvider
       authEndpoint="/api/liveblocks-auth"
       resolveUsers={async ({ userIds }) => {
-        const users = await getClerkUsers(userIds);
-
+     // جلب بيانات المستخدمين (الاسم، الإيميل، الصورة) من Clerk حسب الإيميلات القادمة من Liveblocks
+        const users = await getClerkUsers({ userIds: userIds ?? [] });
         return users;
       }}
     >
@@ -47,3 +47,22 @@ LiveblocksProvider في الكلاينت يطلب توكن من /api/liveblocks-
 | `LiveblocksProvider`   | يستخدم التوكن عشان يدخل المستخدم لغرف Liveblocks مع صلاحياته |
 
  */
+
+
+/*
+
+بدون resolveUsers:
+
+json
+
+["user1@example.com", "user2@example.com"]
+مع resolveUsers:
+
+json
+[
+  { "id": "abc123", "name": "Saeed Abbas", "email": "saeed@example.com", "avatar": "https://..." },
+  { "id": "xyz456", "name": "Omar Ali", "email": "omar@example.com", "avatar": "https://..." }
+]
+
+
+*/
