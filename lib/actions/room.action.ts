@@ -53,6 +53,23 @@ export const getDocument = async ({roomId, userId}: {roomId:string, userId:strin
         console.log('Error happend while getting a room :' , error)
     }
 }
+
+
+export const updateDocumnet = async ({roomId,title}:{roomId:string,title:string}) => {
+    try {
+        const room = liveblocks.updateRoom(roomId,{
+          metadata:{
+            title,
+          }
+        })
+        revalidatePath('/')
+        return parseStringify(room)
+    } catch (error) {
+      console.error('Error when updating title',error)
+    }
+}
+
+
 /*
 بيجيب بيانات غرفة موجودة من Liveblocks
 
