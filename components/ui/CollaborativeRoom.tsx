@@ -21,7 +21,7 @@ const CollaborativeRoom = ({ roomId , roomMetadata }: CollaborativeRoomProps) =>
 
   const updateTitleHandler = async(e: React.KeyboardEvent<HTMLInputElement>) => {
 
-    if(e.key === 'Enter'){
+    if(e.key === 'Enter'){  //يعني لو الزر اللي ضغطته كان انتر نفذلي الكود هاد 
       setLoading(true)
       try {
         if(documentTitle !== roomMetadata.title){
@@ -37,28 +37,28 @@ const CollaborativeRoom = ({ roomId , roomMetadata }: CollaborativeRoomProps) =>
 
   };
 
-  useEffect(() => {
-    const handleClickOutside = (e:MouseEvent) => {
-      if(containerRef.current && !containerRef.current.contains(e.target as Node)) {
-        setEditing(false)
+    useEffect(() => {
+      const handleClickOutside = (e:MouseEvent) => {
+        if(containerRef.current && !containerRef.current.contains(e.target as Node)) {
+          setEditing(false)
+        }
+        updateDocumnet({roomId,title:documentTitle})
+        /*
+        في updateTitleHandler حطّينا await لأننا نحتاج نوقف الكود ونستنى تحديث العنوان يخلص قبل ما نكمل (عشان نضبط setEditing(false) بعد ما يتم التحديث).
+        في useEffect ما حطّينا await لأننا ما بنعتمد على نتيجة التحديث عشان نكمل باقي الكود، بنرسل التحديث وخلاص بدون انتظار.
+        */
       }
-      updateDocumnet({roomId,title:documentTitle})
-      /*
-      في updateTitleHandler حطّينا await لأننا نحتاج نوقف الكود ونستنى تحديث العنوان يخلص قبل ما نكمل (عشان نضبط setEditing(false) بعد ما يتم التحديث).
-      في useEffect ما حطّينا await لأننا ما بنعتمد على نتيجة التحديث عشان نكمل باقي الكود، بنرسل التحديث وخلاص بدون انتظار.
-      */
-    }
-    document.addEventListener('mousedown',handleClickOutside)
+      document.addEventListener('mousedown',handleClickOutside)
 
-    return () => {
-      document.removeEventListener('mousedown',handleClickOutside)
-    }
-  },[roomId,documentTitle])
+      return () => {
+        document.removeEventListener('mousedown',handleClickOutside)
+      }
+    },[roomId,documentTitle])
 
-  useEffect(()=>{
-  if(editing&&inputRef.current)
-      inputRef.current.focus()
-  },[editing])
+    useEffect(()=>{
+    if(editing&&inputRef.current)
+        inputRef.current.focus()
+    },[editing])
 
   return (
     <RoomProvider id={roomId}>
@@ -76,7 +76,7 @@ const CollaborativeRoom = ({ roomId , roomMetadata }: CollaborativeRoomProps) =>
                   ref={inputRef}
                   placeholder="Enter title"
                   onChange={(e) => setDocumentTitle(e.target.value)}
-                  onKeyDown={updateTitleHandler}
+                  onKeyDown={updateTitleHandler} // يعني لما تضلك ضاغط على زر من الكيبورد او اول متضغط عليه يعني لسا مرفعتش ايدك عنه
                   disabled={!editing}
                   className="document-title-input"
                 />
