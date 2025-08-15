@@ -21,7 +21,9 @@ const CollaborativeRoom = ({
   const [documentTitle, setDocumentTitle] = useState(roomMetadata.title);
 
   const containerRef = useRef<HTMLDivElement>(null);
-  const inputRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const updateTitleHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {};
 
   return (
     <RoomProvider id={roomId}>
@@ -33,7 +35,16 @@ const CollaborativeRoom = ({
               className="flex w-fit items-center justify-center gap-2"
             >
               {editing && !loading ? (
-                <Input />
+                <Input
+                  type="text"
+                  value={documentTitle}
+                  ref={inputRef}
+                  placeholder="Enter title"
+                  onChange={(e) => setDocumentTitle(e.target.value)}
+                  onKeyDown={updateTitleHandler}
+                  disabled={!editing}
+                  className="document-title-input"
+                />
               ) : (
                 <>
                   <p className="document-title">{documentTitle}</p>
