@@ -1,6 +1,7 @@
 import AddDocumentBtn from "@/components/ui/AddDocumentBtn";
 import Header from "@/components/ui/Header";
 import { getDocuments } from "@/lib/actions/room.action";
+import { dateConverter } from "@/lib/utils";
 import { SignedIn, UserButton } from "@clerk/nextjs";
 import { currentUser } from "@clerk/nextjs/server";
 import Image from "next/image";
@@ -46,8 +47,12 @@ export default async function Home() {
                           priority
                         />
                       </div>
-                      <div className=""></div>
+                      <div className="space-y-1">
+                        <p className="line-clamp-1 text-lg">{metadata.title}</p>
+                        <p className="text-sm font-light text-blue-100">Created about {dateConverter(createdAt)}</p>
+                      </div>
                     </Link>
+                    {/* delete button later */}
                   </li>
                 ))
               }
