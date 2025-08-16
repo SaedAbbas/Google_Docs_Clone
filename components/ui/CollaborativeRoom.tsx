@@ -1,23 +1,14 @@
 "use client";
 import { ClientSideSuspense, RoomProvider } from "@liveblocks/react";
 import Header from "@/components/ui/Header";
-import {
-  SignedIn,
-  SignedOut,
-  SignInButton,
-  SignUpButton,
-  UserButton,
-} from "@clerk/nextjs";
+import { SignedIn,SignedOut,SignInButton,SignUpButton,UserButton } from "@clerk/nextjs";
 import { Editor } from "../editor/Editor";
 import ActiveCollaborators from "./ActiveCollaborators";
 import { useEffect, useRef, useState } from "react";
 import { Input } from "./input";
 import Image from "next/image";
 import { updateDocumnet } from "@/lib/actions/room.action";
-const CollaborativeRoom = ({
-  roomId,
-  roomMetadata,
-}: CollaborativeRoomProps) => {
+const CollaborativeRoom = ({roomId,roomMetadata}: CollaborativeRoomProps) => {
   const currentUserType = "editor";
 
   const [documentTitle, setDocumentTitle] = useState(roomMetadata.title);
@@ -52,7 +43,7 @@ const CollaborativeRoom = ({
     const handleClickOutside = (e: MouseEvent) => {
       if (
         containerRef.current &&
-        !containerRef.current.contains(e.target as Node)
+        !containerRef.current.contains(e.target as Node) // يعني اذا اللي ضعطت عليه مش ولد من ولاد الكونتينر ريف حطلي الست ادتنح بفولس يعني اقفل الاتبت واعرض التايتل
       ) {
         setEditing(false);
       }
