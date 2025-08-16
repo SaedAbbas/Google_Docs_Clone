@@ -18,7 +18,7 @@ const Document = async({params} : SearchParamProps) => {
 
       if(!room) redirect('/')
 
-      //access to the permessions of the user to access the document
+      //assess to the permissions of the user to access the document
 
   return (
     <main className="flex w-full flex-col">
