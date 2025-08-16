@@ -37,9 +37,9 @@ export const createDocument = async ( {userId,email}: CreateDocumentParams) => {
 };
 
 
-
-
 export const getDocument = async ({roomId, userId}: {roomId:string, userId:string}) => {
+    // انا حرفيا استفدت من الفنكشن بشكل مبدئي انه اجيب معلومات الغرفة بناء على الايدي تاعها واستفدت منه باني اجيب الميتا داتا واخد منه التايتل عشان استفيد منها لما بدي اعدل
+    //الاستفادة الجاي حستفيد باني اعرف مين اللي اله صلاحيات فهاي الغرفة
     try {
         const room = await liveblocks.getRoom(roomId)
       
@@ -56,19 +56,29 @@ export const getDocument = async ({roomId, userId}: {roomId:string, userId:strin
 
 
 export const updateDocumnet = async ({roomId,title}:{roomId:string,title:string}) => {
-    try {
-        const room = liveblocks.updateRoom(roomId,{
+  try {
+    const room = liveblocks.updateRoom(roomId,{
           metadata:{
             title,
           }
         })
         revalidatePath('/')
         return parseStringify(room)
-    } catch (error) {
-      console.error('Error when updating title',error)
+      } catch (error) {
+        console.error('Error when updating title',error)
     }
 }
 
+
+export const getDocuments = async (email:string) => {
+    try {
+        const room = await liveblocks.getRooms({userId:email})
+          return parseStringify(room)
+      
+    } catch (error) {
+        console.log('Error happend while getting a rooms :' , error)
+    }
+}
 
 /*
 بيجيب بيانات غرفة موجودة من Liveblocks

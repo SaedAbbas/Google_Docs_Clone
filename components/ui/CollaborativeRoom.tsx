@@ -26,7 +26,7 @@ const CollaborativeRoom = ({roomId,roomMetadata}: CollaborativeRoomProps) => {
       setLoading(true);
       try {
         if (documentTitle !== roomMetadata.title) {
-          const updatedDocument = await updateDocumnet({
+          const updatedDocument = await updateDocumnet({ //بدي اعدل التايتل بالسيرفر عشان لما يعمل ررفرش يضله مبين
             roomId,
             title: documentTitle,
           });
