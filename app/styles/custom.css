@@ -125,15 +125,15 @@
   }
 
   .comments-container {
-    @apply mb-10 space-y-4 lg:w-fit flex w-full flex-col items-center justify-center;
+    @apply mb-10 lg:w-fit flex w-full flex-col items-center justify-center;
   }
 
   .comment-composer {
-    @apply w-full max-w-[800px] border border-dark-300 bg-dark-200 shadow-sm lg:w-[350px];
+    @apply w-full max-w-[800px] !border border-dark-300 !bg-dark-200 shadow-sm lg:w-[350px];
   }
 
   .comment-thread {
-    @apply w-full max-w-[800px] border border-dark-300 bg-dark-200 shadow-sm lg:w-[350px] transition-all;
+    @apply w-full max-w-[800px] !border border-dark-300 bg-dark-200 shadow-sm lg:w-[350px] transition-all;
   }
 
   .loader {

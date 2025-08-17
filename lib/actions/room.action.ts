@@ -20,7 +20,7 @@ export const createDocument = async ( {userId,email}: CreateDocumentParams) => {
     // جهزت بيانات وصفية (metadata) عن الغرفة، زي مين عملها والإيميل والعنوان.
     
     const usersAccesses : RoomAccesses = {
-      [email]: ['room:write']
+      [email]: ['room:write']   //  [email] يعني الايميل هاد متغير 
     }
     
     const room = await liveblocks.createRoom(roomId, {

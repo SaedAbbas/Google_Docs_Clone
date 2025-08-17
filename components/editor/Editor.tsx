@@ -10,11 +10,11 @@ import { ContentEditable } from '@lexical/react/LexicalContentEditable';
 import { HistoryPlugin } from '@lexical/react/LexicalHistoryPlugin';
 import { LexicalErrorBoundary } from '@lexical/react/LexicalErrorBoundary';
 import React from 'react';
-import { FloatingComposer, FloatingThreads, FloatingToolbarPlugin, liveblocksConfig, LiveblocksPlugin } from '@liveblocks/react-lexical'
+import { FloatingComposer, FloatingThreads, liveblocksConfig, LiveblocksPlugin, useIsEditorReady } from '@liveblocks/react-lexical'
 import Loader from '../ui/Loader';
-import { LiveblocksProvider } from '@liveblocks/react';
-import { Liveblocks } from '@liveblocks/node';
 import { useThreads } from '@liveblocks/react/suspense';
+import FloatingToolbar from './plugins/FloatingToolbarPlugin';
+import Comments from '../comments';
 
 // Catch any errors that occur during Lexical updates and log them
 // or throw them as needed. If you don't throw them, Lexical will
@@ -25,7 +25,7 @@ function Placeholder() {
 }
 
 export function Editor({roomId,currentUserType}:{roomId:string,currentUserType:UserType}) {
-  const status = useEditorStatus()
+  const isReady  = useIsEditorReady()
   const { threads } = useThreads()
 
   const initialConfig = liveblocksConfig(
@@ -35,7 +35,7 @@ export function Editor({roomId,currentUserType}:{roomId:string,currentUserType:U
     onError: (error: Error) => {
       console.error(error);
       throw error;
-    },
+    },  
     theme: Theme,
     editable: currentUserType === 'editor',
   }
@@ -49,7 +49,7 @@ export function Editor({roomId,currentUserType}:{roomId:string,currentUserType:U
           {/* {currentUserType === 'editor' && <DeleteModal roomId={roomId} />} */}
         </div>
         <div className="editor-wrapper flex flex-col items-center justify-start">
-          {status === 'not-loaded' || status === 'loading' ? <Loader /> : (
+          { !isReady  ? <Loader /> : (
               <div className="editor-inner min-h-[1100px] relative mb-5 h-fit w-full max-w-[800px] shadow-md lg:mb-10">
                 <RichTextPlugin
                   contentEditable={
@@ -58,7 +58,7 @@ export function Editor({roomId,currentUserType}:{roomId:string,currentUserType:U
                   placeholder={<Placeholder />}
                   ErrorBoundary={LexicalErrorBoundary}
                 />
-                {currentUserType === 'editor' && <FloatingToolbarPlugin />}
+                {currentUserType === 'editor' && <FloatingToolbar />}
                 <HistoryPlugin />
                 <AutoFocusPlugin />
             </div>
@@ -67,6 +67,7 @@ export function Editor({roomId,currentUserType}:{roomId:string,currentUserType:U
           <LiveblocksPlugin>
             <FloatingComposer className='w-[350px]' />
             <FloatingThreads threads = {threads}/>
+            <Comments/>
           </LiveblocksPlugin>
           
         </div>
