@@ -2,17 +2,28 @@
 import {ClientSideSuspense,LiveblocksProvider} from "@liveblocks/react/suspense";
 import Loader from "@/components/ui/Loader";
 import { ReactNode } from "react";
-import { getClerkUsers } from "@/lib/actions/user.action";
+import { getClerkUsers, getDocumentsUsers } from "@/lib/actions/user.action";
+import { useUser } from "@clerk/nextjs";
 
 const Provider = ({ children }: { children: ReactNode }) => {
+
+  const {user: clerkUser} = useUser() //useUser هاي بتشتغل فالكلينت كمبوننت عكس الكرنت يوزر
   return (
     //السبب إنه استخدم authEndpoint بدل المفتاح العام هو الأمان، عشان ما ينكشف مفتاحك السري في المتصفح.
     <LiveblocksProvider
       authEndpoint="/api/liveblocks-auth"
-      resolveUsers={async ({ userIds }) => {
+      resolveUsers={async ({ userIds }) => { // بدونه مش حيقدر يتعرف عاليوزرز اللايف بلوكس
      // جلب بيانات المستخدمين (الاسم، الإيميل، الصورة) من Clerk حسب الإيميلات القادمة من Liveblocks
         const users = await getClerkUsers({ userIds: userIds ?? [] });
         return users;
+      }}
+      resolveMentionSuggestions={async ({ text, roomId}) => {
+        const roomUsers = await getDocumentsUsers({
+          roomId,
+          currentUser:clerkUser?.emailAddresses[0].emailAddress!,
+          text
+        })
+        return roomUsers
       }}
     >
       <ClientSideSuspense fallback={<Loader />}>{children}</ClientSideSuspense>

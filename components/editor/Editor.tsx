@@ -48,7 +48,7 @@ export function Editor({roomId,currentUserType}:{roomId:string,currentUserType:U
           <ToolbarPlugin />
           {/* {currentUserType === 'editor' && <DeleteModal roomId={roomId} />} */}
         </div>
-        <div className="editor-wrapper flex flex-col items-center justify-start">
+        <div className="editor-wrapper flex flex-col items-center justify-start text-white">
           { !isReady  ? <Loader /> : (
               <div className="editor-inner min-h-[1100px] relative mb-5 h-fit w-full max-w-[800px] shadow-md lg:mb-10">
                 <RichTextPlugin
