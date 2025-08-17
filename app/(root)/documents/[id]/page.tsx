@@ -1,5 +1,6 @@
 import CollaborativeRoom from "@/components/ui/CollaborativeRoom";
 import { getDocument } from "@/lib/actions/room.action";
+import { getClerkUsers } from "@/lib/actions/user.action";
 import { currentUser } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import React from "react";
@@ -17,14 +18,25 @@ const Document = async({params} : SearchParamProps) => {
       })
 
       if(!room) redirect('/')
+        
+        //assess to the permissions of the user to access the document
+        const userIds = Object.keys(room.usersAccesses)
+        const users = await getClerkUsers({userIds})
 
-      //assess to the permissions of the user to access the document
+        const userData = users.map((user:User) => ({
+          ...user,
+          userType: room.userAccesses[user.email]?.includes('room:write') ? 'editor' : 'viewer'
+        }))
+        
+        const currentUserType = room.userAccesses[clerkUser.emailAddresses[0].emailAddress]?.includes('room:write') ? 'editor' : 'viewer'
 
   return (
     <main className="flex w-full flex-col">
       <CollaborativeRoom 
         roomId={id}
         roomMetadata={room.metadata}
+        users={userData}
+        currentUserType={currentUserType}
       />
     </main>
   );

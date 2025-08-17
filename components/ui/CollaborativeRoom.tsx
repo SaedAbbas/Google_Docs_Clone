@@ -9,8 +9,7 @@ import { Input } from "./input";
 import Image from "next/image";
 import { updateDocumnet } from "@/lib/actions/room.action";
 import Loader from "./Loader";
-const CollaborativeRoom = ({roomId,roomMetadata}: CollaborativeRoomProps) => {
-  const currentUserType = "editor";
+const CollaborativeRoom = ({roomId,roomMetadata,users,currentUserType}: CollaborativeRoomProps) => {
 
   const [documentTitle, setDocumentTitle] = useState(roomMetadata.title);
   const [editing, setEditing] = useState(false);
@@ -127,7 +126,7 @@ const CollaborativeRoom = ({roomId,roomMetadata}: CollaborativeRoomProps) => {
               </div>
             </div>
           </Header>
-          <Editor />
+          <Editor roomId={roomId} currentUserType={currentUserType} />
         </div>
       </ClientSideSuspense>
     </RoomProvider>
