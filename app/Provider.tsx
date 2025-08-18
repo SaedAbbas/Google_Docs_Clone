@@ -17,10 +17,10 @@ const Provider = ({ children }: { children: ReactNode }) => {
         const users = await getClerkUsers({ userIds: userIds ?? [] });
         return users;
       }}
-      resolveMentionSuggestions={async ({ text, roomId}) => {
+      resolveMentionSuggestions={async ({ text, roomId}) => { // هاي عشان المنشن يشتغل
         const roomUsers = await getDocumentsUsers({
           roomId,
-          currentUser:clerkUser?.emailAddresses[0].emailAddress!,
+          currentUser: clerkUser?.emailAddresses?.[0]?.emailAddress ?? "",
           text
         })
         return roomUsers
