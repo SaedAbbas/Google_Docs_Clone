@@ -1,3 +1,4 @@
+import { DeleteModal } from "@/components/DeleteModal";
 import AddDocumentBtn from "@/components/ui/AddDocumentBtn";
 import Header from "@/components/ui/Header";
 import { getDocuments } from "@/lib/actions/room.action";
@@ -53,6 +54,7 @@ export default async function Home() {
                       </div>
                     </Link>
                     {/* delete button later */}
+                    <DeleteModal roomId= {id}/>
                   </li>
                 ))
               }

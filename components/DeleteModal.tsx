@@ -34,9 +34,9 @@ export const DeleteModal = ({ roomId }: DeleteModalProps) => {
 
     setLoading(false);
   };
-
+    
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog open={open} onOpenChange={setOpen}>      {/* عشان لما تحذف يسكر المودال لحاله*/}
       <DialogTrigger asChild>
         <Button className="min-w-9 rounded-xl bg-transparent p-2 transition-all">
           <Image

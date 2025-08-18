@@ -26,7 +26,7 @@ const Document = async({params} : SearchParamProps) => {
         const userData = users.map((user:User) => ({
           ...user, //معلومات اليوزر 
           // بعدها الغرفة بتشوف اذا الايميل هاد تاع اليوزر بحتوي على روم رايت فهو ادتر
-          userType: room?.usersAccesses[user.email]?.includes('room:write') ? 'editor' : 'viewer'
+          userType: room?.usersAccesses[user?.email]?.includes('room:write') ? 'editor' : 'viewer'
         }))
         
         const currentUserType = room.usersAccesses[clerkUser.emailAddresses[0].emailAddress]?.includes('room:write') ? 'editor' : 'viewer'

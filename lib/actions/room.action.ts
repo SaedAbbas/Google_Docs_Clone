@@ -27,7 +27,7 @@ export const createDocument = async ( {userId,email}: CreateDocumentParams) => {
     const room = await liveblocks.createRoom(roomId, {
       metadata,
       usersAccesses,
-      defaultAccesses:['room:write'] // صلاحية اللي فالغرفة برضه انهم يكتبوا
+      defaultAccesses:[] // صلاحية اللي فالغرفة 
     });
     revalidatePath('/') //بعد ما الغرفة اتعملت، طلبت من Next.js يعمل تحديث للصفحة الرئيسية على السيرفر طبعا بدون رفرش على المتصفح / عشان يظهر فيها التغييرات.
     
@@ -44,9 +44,9 @@ export const getDocument = async ({roomId, userId}: {roomId:string, userId:strin
     try {
         const room = await liveblocks.getRoom(roomId)
       
-        // const hasAccsess = Object.keys(room.usersAccesses).includes(userId)    // userId:clerkUser.emailAddresses[0].emailAddress
-        //   if(!hasAccsess) 
-        //     throw new Error('You do not have access to this document')
+        const hasAccsess = Object.keys(room.usersAccesses).includes(userId)    // userId:clerkUser.emailAddresses[0].emailAddress
+          if(!hasAccsess) 
+            throw new Error('You do not have access to this document')
       
           return parseStringify(room)
       
