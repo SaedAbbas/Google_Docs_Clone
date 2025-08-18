@@ -114,8 +114,8 @@ const CollaborativeRoom = ({roomId,roomMetadata,users,currentUserType}: Collabor
                   <ActiveCollaborators />
                   <ShareModal
                     roomId={roomId}
-                    collaborartors={users}
-                    createrId={roomMetadata.creatorId}
+                    collaborators={users}
+                    creatorId={roomMetadata.creatorId}
                     currentUserType={currentUserType}
                   />
                   <SignedOut>

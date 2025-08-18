@@ -16,9 +16,9 @@ import { Button } from "./ui/button";
 import Image from "next/image";
 import { Label } from "./ui/label";
 import { Input } from "./ui/input";
-import UserTypeSelector from "./UserTypeSelectors";
 import { updateDocumentAccess } from "@/lib/actions/room.action";
 import Collaborator from "./Collaborator";
+import UserTypeSelector from "./UserTypeSelector";
 
 const ShareModal = ({ roomId, collaborators, creatorId, currentUserType }: ShareDocumentDialogProps) => {
   const user = useSelf();
@@ -44,7 +44,7 @@ const ShareModal = ({ roomId, collaborators, creatorId, currentUserType }: Share
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger>
+      <DialogTrigger asChild>
         <Button className="gradient-blue flex h-9 gap-1 px-4" disabled={currentUserType !== 'editor'}>
           <Image
             src="/assets/icons/share.svg"
@@ -88,7 +88,7 @@ const ShareModal = ({ roomId, collaborators, creatorId, currentUserType }: Share
 
         <div className="my-2 space-y-2">
           <ul className="flex flex-col">
-            {collaborators.map((collaborator) => (
+            {(collaborators ?? []).map((collaborator) => (
               <Collaborator 
                 key={collaborator.id}
                 roomId={roomId}
