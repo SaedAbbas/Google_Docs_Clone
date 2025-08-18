@@ -36,7 +36,7 @@ export const getClerkUsers = async ({ userIds }: { userIds: string[] }) => {
   }
 };
 
-export const getDocumentsUsers = async ({ roomId , currentUser , text }: {  roomId:string , currentUser:string , text:string }) => {
+export const getDocumentsUsers = async ({ roomId , currentUser , text }: { roomId:string , currentUser:string , text:string }) => {
   try {
         const room = await liveblocks.getRoom(roomId)
         const users = Object.keys(room.defaultAccesses).filter((email) => email !== currentUser) // عشان المنشن لانه فالاخر ما بدي امنشن حالي طبعا
