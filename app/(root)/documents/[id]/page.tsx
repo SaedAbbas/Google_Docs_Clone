@@ -23,7 +23,7 @@ const Document = async({params} : SearchParamProps) => {
         const userIds = Object.keys(room.usersAccesses) //يعني هاتلي الايميلات تعوتهم اللي هي عبارة عن كييز اللي موجودة بالغرفة
         const users = await getClerkUsers({userIds}) // بعدها بجيب كل اليوزر اللي تسجلوا بكليرك طبعا حسب الايميلات 
 
-        const userData = users.map((user:User) => ({
+        const usersData = users.map((user:User) => ({
           ...user, //معلومات اليوزر 
           // بعدها الغرفة بتشوف اذا الايميل هاد تاع اليوزر بحتوي على روم رايت فهو ادتر
           userType: room?.usersAccesses[user?.email]?.includes('room:write') ? 'editor' : 'viewer'
@@ -36,7 +36,7 @@ const Document = async({params} : SearchParamProps) => {
       <CollaborativeRoom 
         roomId={id}
         roomMetadata={room.metadata}
-        users={userData} // كل اليوزرز فالغرفة بمعلوماتهم ونوع صلاحيتهم ادتر او فيوور
+        users={usersData} // كل اليوزرز فالغرفة بمعلوماتهم ونوع صلاحيتهم ادتر او فيوور
         currentUserType={currentUserType}  //صلاحية الشخص الحالي صاحب اللي مسجل دخول
       />
     </main>

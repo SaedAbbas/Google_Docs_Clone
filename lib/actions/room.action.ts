@@ -13,7 +13,7 @@ export const createDocument = async ( {userId,email}: CreateDocumentParams) => {
 
   try {
     const metadata = {
-      createId: userId,
+      creatorId: userId,
       email,
       title: "untitled",
     };
