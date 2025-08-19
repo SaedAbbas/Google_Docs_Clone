@@ -14,11 +14,21 @@ export default async function Home() {
   const clerkUser = await currentUser(); // عشان نقول انه اللي مش مسجل دخول ما يقدر ينشئ دكيومنت
   if (!clerkUser) redirect("/sign-in");
 
-  const roomDocuments = await getDocuments(clerkUser.emailAddresses[0].emailAddress)
+  const roomDocuments = await getDocuments(
+    clerkUser.emailAddresses[0].emailAddress
+  );
 
   return (
     <main className="home-container">
       <Header className="sticky top-0 left-0">
+        <Image
+          src="/assets/icons/logo.svg"
+          alt="Logo with name"
+          width={120}
+          height={32}
+          className="md:hidden mr-28"
+          priority
+        />
         <div className="flex items-center gap-2 lg:gap-4">
           <Notifications />
           <SignedIn>
@@ -28,38 +38,42 @@ export default async function Home() {
       </Header>
       {roomDocuments.data.length > 0 ? (
         <div className="document-list-container">
-            <div className="document-list-title">
-              <h3 className="text-28-semiblod">All Documents</h3>
-              <AddDocumentBtn
-                userId={clerkUser.id}
-                email={clerkUser.emailAddresses[0].emailAddress}
-              />
-            </div>
-            <ul className="document-ul">
-              {
-                roomDocuments.data.map(({id , metadata , createdAt }: any) => (
-                  <li key={id} className="document-list-item">
-                    <Link href={`/documents/${id}`} className="flex flex-1 items-center gap-4">
-                      <div className="hidden rounded-md bg-dark-100 p-2 sm:block">
-                        <Image
-                          src='/assets/icons/doc.svg'
-                          width={40}
-                          height={40}
-                          alt={metadata.title}
-                          priority
-                        />
-                      </div>
-                      <div className="space-y-1">
-                        <p className="line-clamp-1 text-lg">{metadata.title}</p>
-                        <p className="text-sm font-light text-blue-100">Created about {dateConverter(createdAt)}</p>
-                      </div>
-                    </Link>
-                    {/* delete button later */}
-                    <DeleteModal roomId= {id}/>
-                  </li>
-                ))
-              }
-            </ul>
+          <div className="document-list-title">
+            <h3 className="text-28-semiblod">All Documents</h3>
+            <AddDocumentBtn
+              userId={clerkUser.id}
+              email={clerkUser.emailAddresses[0].emailAddress}
+              roomDocuments={roomDocuments?.data}
+            />
+          </div>
+          <ul className="document-ul">
+            {roomDocuments.data.map(({ id, metadata, createdAt }: any) => (
+              <li key={id} className="document-list-item">
+                <Link
+                  href={`/documents/${id}`}
+                  className="flex flex-1 items-center gap-4"
+                >
+                  <div className="hidden rounded-md bg-dark-100 p-2 sm:block">
+                    <Image
+                      src="/assets/icons/doc.svg"
+                      width={40}
+                      height={40}
+                      alt={metadata.title}
+                      priority
+                    />
+                  </div>
+                  <div className="space-y-1">
+                    <p className="line-clamp-1 text-lg">{metadata.title}</p>
+                    <p className="text-sm font-light text-blue-100">
+                      Created about {dateConverter(createdAt)}
+                    </p>
+                  </div>
+                </Link>
+                {/* delete button later */}
+                <DeleteModal roomId={id} />
+              </li>
+            ))}
+          </ul>
         </div>
       ) : (
         <div className="document-list-empty">

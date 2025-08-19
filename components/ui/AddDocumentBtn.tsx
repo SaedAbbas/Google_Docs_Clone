@@ -5,7 +5,7 @@ import Image from "next/image";
 import { createDocument } from "@/lib/actions/room.action";
 import { useRouter } from "next/navigation";
 
-const AddDocumentBtn = ({ userId, email }: AddDocumentBtnProps) => {
+const AddDocumentBtn = ({ userId, email, roomDocuments }: AddDocumentBtnProps) => {
   const router = useRouter();
 
   const addDocumentHandler = async () => {
@@ -23,7 +23,7 @@ const AddDocumentBtn = ({ userId, email }: AddDocumentBtnProps) => {
       className="gradient-blue flex gap-1 shadow-md cursor-pointer"
     >
       <Image src="/assets/icons/add.svg" priority alt="add" width={24} height={24} />
-      <p className="hidden sm:block">Start a blank document</p>
+      <p className={`${roomDocuments?? 0 > 0 ? 'hidden':'block'}`}>Start a blank document</p>
     </Button>
   );
 };
