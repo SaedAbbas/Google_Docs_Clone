@@ -1,4 +1,5 @@
 import { DeleteModal } from "@/components/DeleteModal";
+import Notifications from "@/components/Notifications";
 import AddDocumentBtn from "@/components/ui/AddDocumentBtn";
 import Header from "@/components/ui/Header";
 import { getDocuments } from "@/lib/actions/room.action";
@@ -19,7 +20,7 @@ export default async function Home() {
     <main className="home-container">
       <Header className="sticky top-0 left-0">
         <div className="flex items-center gap-2 lg:gap-4">
-          Notification
+          <Notifications />
           <SignedIn>
             <UserButton />
           </SignedIn>
