@@ -70,11 +70,9 @@ const CollaborativeRoom = ({roomId,roomMetadata,users,currentUserType}: Collabor
       <ClientSideSuspense fallback={<Loader/>}>
         <div className="collaborative-room">
           <Header>
-            <div className="flex justify-end w-full">
-              <div className="flex justify-between w-7/12">
                 <div
                   ref={containerRef}
-                  className="flex w-fit items-center justify-center gap-2"
+                  className="flex w-full items-center justify-start md:justify-center gap-2"
                 >
                   {editing && !loading ? (
                     <Input
@@ -110,7 +108,7 @@ const CollaborativeRoom = ({roomId,roomMetadata,users,currentUserType}: Collabor
                     <p className="text-sm text-gray-400">saving ...</p>
                   )}
                 </div>
-                <div className="flex w-full flex-1 justify-end gap-2 sm:gap-3">
+                <div className="flex w-full flex-1 justify-end items-center gap-2 sm:gap-3">
                   <ActiveCollaborators />
                   <ShareModal
                     roomId={roomId}
@@ -130,8 +128,6 @@ const CollaborativeRoom = ({roomId,roomMetadata,users,currentUserType}: Collabor
                     <UserButton />
                   </SignedIn>
                 </div>
-              </div>
-            </div>
           </Header>
           <Editor roomId={roomId} currentUserType={currentUserType} />
         </div>
